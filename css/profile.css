@@ -489,6 +489,21 @@ button {
   font-size: 1.5rem;
 }
 
+.wallet-anim{
+    background: linear-gradient(135deg,#1d4ed8,#8b5cf6);
+    padding: 20px;
+    border-radius: 16px;
+    color: white;
+    font-size: 28px;
+    font-weight: 800;
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+    transition: all .3s ease;
+}
+
+.wallet-anim.glow{
+    transform: scale(1.08);
+    box-shadow: 0 0 40px rgba(59,130,246,.6);
+}
 /* Content Cards */
 .glass-card {
   background: var(--glass-bg);
