@@ -227,6 +227,36 @@ html{
     box-shadow:0 15px 40px rgba(0,0,0,0.5);
 }
 
+.game-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.game-card{
+    background:#0f172a;
+    padding:20px;
+    border-radius:16px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,.05);
+    transition:.3s;
+}
+
+.game-card:hover{
+    transform:translateY(-8px);
+    border-color:#3b82f6;
+}
+
+.game-card button{
+    margin-top:10px;
+    padding:10px 15px;
+    border:none;
+    border-radius:10px;
+    background:#3b82f6;
+    color:white;
+    cursor:pointer;
+}
+
 /* =========================
    WALLET CARD (SPECIAL)
 ========================= */
