@@ -397,7 +397,7 @@ border-radius:50%;
 
 background:linear-gradient(
     135deg,
-    var(--primary)
+    var(--primary),
     #7c3aed
 );
 }
