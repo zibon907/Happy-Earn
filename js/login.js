@@ -6,18 +6,9 @@ document.getElementById("loginForm")
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const result = AuthService.login({
-        email,
-        password
-    });
+    const result = Auth.login(email, password);
 
     if (result.success) {
-
-        // save session
-        localStorage.setItem(
-            "currentUser",
-            JSON.stringify(result.user)
-        );
 
         window.location.href = "dashboard.html";
 
