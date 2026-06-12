@@ -1,297 +1,361 @@
-// ================================
-// Dashboard Controller
-// ================================
+document.addEventListener(
+"DOMContentLoaded",
+initializeDashboard
+);
 
-class DashboardController {
+/* =========================
+INITIALIZE
+========================= */
 
-    constructor() {
-        this.currentUser = null;
+function initializeDashboard(){
 
-        this.elements = {
-            navUserName: document.getElementById("navUserName"),
+const user =
+StorageService.getCurrentUser();
 
-            userName: document.getElementById("userName"),
-            userEmail: document.getElementById("userEmail"),
-
-            userPoints: document.getElementById("userPoints"),
-            totalPoints: document.getElementById("totalPoints"),
-
-            vipLevel: document.getElementById("vipLevel"),
-            userVip: document.getElementById("userVip"),
-
-            referralCode: document.getElementById("referralCode"),
-            referralCount: document.getElementById("referralCount"),
-
-            activityCount: document.getElementById("activityCount"),
-            activityList: document.getElementById("activityList"),
-
-            copyReferralBtn: document.getElementById("copyReferralBtn")
-        };
-    }
-
-    // ================================
-    // Init
-    // ================================
-
-    init() {
-
-        this.loadUser();
-
-        this.renderDashboard();
-
-        this.bindEvents();
-    }
-
-    // ================================
-    // Load Current User
-    // ================================
-
-    loadUser() {
-
-        const currentUser =
-            JSON.parse(
-                localStorage.getItem("currentUser")
-            );
-
-        if (!currentUser) {
-
-            window.location.href = "index.html";
-
-            return;
-        }
-
-        this.currentUser = currentUser;
-    }
-
-    // ================================
-    // Render Dashboard
-    // ================================
-
-    renderDashboard() {
-
-        this.renderHeader();
-
-        this.renderWallet();
-
-        this.renderVip();
-
-        this.renderReferral();
-
-        this.renderActivities();
-    }
-
-    // ================================
-    // Header
-    // ================================
-
-    renderHeader() {
-
-        this.elements.userName.textContent =
-            this.currentUser.fullName;
-
-        this.elements.navUserName.textContent =
-            this.currentUser.fullName;
-
-        this.elements.userEmail.textContent =
-            this.currentUser.email;
-    }
-
-    // ================================
-    // Wallet
-    // ================================
-
-    renderWallet() {
-
-        const points =
-            this.currentUser.wallet?.points || 0;
-
-        this.elements.userPoints.textContent =
-            points.toLocaleString();
-
-        this.elements.totalPoints.textContent =
-            points.toLocaleString();
-    }
-
-    // ================================
-    // VIP
-    // ================================
-
-    renderVip() {
-
-        const vipTitle =
-            this.currentUser.vip?.title ||
-            "Bronze";
-
-        this.elements.vipLevel.textContent =
-            vipTitle;
-
-        this.elements.userVip.textContent =
-            vipTitle;
-    }
-
-    // ================================
-    // Referral
-    // ================================
-
-    renderReferral() {
-
-        const referralCode =
-            this.currentUser.referral?.code ||
-            "NO-CODE";
-
-        const referrals =
-            this.currentUser.referral?.referredUsers?.length ||
-            0;
-
-        this.elements.referralCode.textContent =
-            referralCode;
-
-        this.elements.referralCount.textContent =
-            referrals;
-    }
-
-    // ================================
-    // Activities
-    // ================================
-
-    renderActivities() {
-
-        const activities =
-            this.currentUser.activities || [];
-
-        this.elements.activityCount.textContent =
-            activities.length;
-
-        this.elements.activityList.innerHTML = "";
-
-        if (!activities.length) {
-
-            this.elements.activityList.innerHTML = `
-                <div class="activity-item">
-                    <div class="activity-icon">
-                        ✓
-                    </div>
-
-                    <div>
-                        No activity found
-                    </div>
-                </div>
-            `;
-
-            return;
-        }
-
-        activities
-            .slice()
-            .reverse()
-            .forEach(activity => {
-
-                const item =
-                document.createElement("div");
-
-                item.className =
-                    "activity-item";
-
-                item.innerHTML = `
-                    <div class="activity-icon">
-                        ✓
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            ${activity.title || "Activity"}
-                        </strong>
-
-                        <br>
-
-                        <small>
-                            ${activity.description || ""}
-                        </small>
-
-                    </div>
-                `;
-
-                this.elements.activityList
-                    .appendChild(item);
-            });
-    }
-
-    // ================================
-    // Events
-    // ================================
-
-    bindEvents() {
-
-        if (this.elements.copyReferralBtn) {
-
-            this.elements.copyReferralBtn
-                .addEventListener(
-                    "click",
-                    () => this.copyReferralCode()
-                );
-        }
-    }
-
-    // ================================
-    // Copy Referral
-    // ================================
-
-    copyReferralCode() {
-
-        const code =
-            this.currentUser.referral?.code;
-
-        if (!code) return;
-
-        navigator.clipboard
-            .writeText(code)
-            .then(() => {
-
-                const btn =
-                    this.elements.copyReferralBtn;
-
-                const oldText =
-                    btn.textContent;
-
-                btn.textContent =
-                    "Copied";
-
-                setTimeout(() => {
-
-                    btn.textContent =
-                        oldText;
-
-                }, 1500);
-            });
-    }
-}
-
-// ================================
-// Logout
-// ================================
-
-function logout() {
-
-    localStorage.removeItem(
-        "currentUser"
-    );
+if(!user){
 
     window.location.href =
-        "index.html";
+    "index.html";
+
+    return;
 }
 
-// ================================
-// Start Application
-// ================================
+renderUserInfo(user);
 
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
+renderWallet(user);
 
-        const dashboard =
-            new DashboardController();
+renderVip(user);
 
-        dashboard.init();
-    }
+renderReferral(user);
+
+renderActivities(user);
+
+bindEvents(user);
+
+}
+
+/* =========================
+USER INFO
+========================= */
+
+function renderUserInfo(user){
+
+const userName =
+document.getElementById(
+"userName"
 );
+
+const navUserName =
+document.getElementById(
+"navUserName"
+);
+
+const userEmail =
+document.getElementById(
+"userEmail"
+);
+
+if(userName){
+
+    userName.textContent =
+    user.fullName;
+
+}
+
+if(navUserName){
+
+    navUserName.textContent =
+    user.fullName;
+
+}
+
+if(userEmail){
+
+    userEmail.textContent =
+    user.email;
+
+}
+
+}
+
+/* =========================
+WALLET
+========================= */
+
+function renderWallet(user){
+
+const userPoints =
+document.getElementById(
+"userPoints"
+);
+
+const totalPoints =
+document.getElementById(
+"totalPoints"
+);
+
+if(userPoints){
+
+    userPoints.textContent =
+    Number(
+    user.points
+    ).toLocaleString();
+
+}
+
+if(totalPoints){
+
+    totalPoints.textContent =
+    Number(
+    user.points
+    ).toLocaleString();
+
+}
+
+}
+
+/* =========================
+VIP
+========================= */
+
+function renderVip(user){
+
+const vipNames = {
+
+    0:"Bronze",
+
+    1:"Silver",
+
+    2:"Gold",
+
+    3:"Platinum",
+
+    4:"Diamond"
+};
+
+const vipTitle =
+vipNames[user.vipLevel]
+|| "Bronze";
+
+const vipLevel =
+document.getElementById(
+"vipLevel"
+);
+
+const userVip =
+document.getElementById(
+"userVip"
+);
+
+if(vipLevel){
+
+    vipLevel.textContent =
+    vipTitle;
+
+}
+
+if(userVip){
+
+    userVip.textContent =
+    vipTitle;
+
+}
+
+}
+
+/* =========================
+REFERRAL
+========================= */
+
+function renderReferral(user){
+
+const referralCode =
+document.getElementById(
+"referralCode"
+);
+
+const referralCount =
+document.getElementById(
+"referralCount"
+);
+
+if(referralCode){
+
+    referralCode.textContent =
+    user.referralCode;
+
+}
+
+if(referralCount){
+
+    referralCount.textContent =
+    user.totalReferrals;
+
+}
+
+}
+
+/* =========================
+ACTIVITIES
+========================= */
+
+function renderActivities(user){
+
+const activityList =
+document.getElementById(
+"activityList"
+);
+
+const activityCount =
+document.getElementById(
+"activityCount"
+);
+
+if(!activityList){
+
+    return;
+
+}
+
+activityList.innerHTML = "";
+
+const activities =
+user.activities || [];
+
+if(activityCount){
+
+    activityCount.textContent =
+    activities.length;
+
+}
+
+if(
+activities.length === 0
+){
+
+    activityList.innerHTML = `
+    <div class="activity-item">
+
+        <div class="activity-icon">
+            ✓
+        </div>
+
+        <div>
+
+            No activity found
+
+        </div>
+
+    </div>
+    `;
+
+    return;
+}
+
+activities
+.slice()
+.reverse()
+.forEach(activity => {
+
+    const item =
+    document.createElement(
+    "div"
+    );
+
+    item.className =
+    "activity-item";
+
+    item.innerHTML = `
+
+    <div class="activity-icon">
+
+        ✓
+
+    </div>
+
+    <div>
+
+        <strong>
+
+            ${activity.type}
+
+        </strong>
+
+        <br>
+
+        <small>
+
+            ${activity.description}
+
+        </small>
+
+    </div>
+
+    `;
+
+    activityList.appendChild(
+    item
+    );
+});
+
+}
+
+/* =========================
+EVENTS
+========================= */
+
+function bindEvents(user){
+
+const copyButton =
+document.getElementById(
+"copyReferralBtn"
+);
+
+if(copyButton){
+
+    copyButton
+    .addEventListener(
+    "click",
+    function(){
+
+        copyReferralCode(
+        user.referralCode
+        );
+
+    }
+    );
+
+}
+
+}
+
+/* =========================
+COPY REFERRAL
+========================= */
+
+function copyReferralCode(code){
+
+navigator.clipboard
+.writeText(code)
+.then(function(){
+
+    alert(
+    "Referral code copied."
+    );
+
+});
+
+}
+
+/* =========================
+LOGOUT
+========================= */
+
+function logout(){
+
+AuthService.logout();
+
+window.location.href =
+"index.html";
+
+}
