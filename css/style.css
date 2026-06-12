@@ -251,7 +251,8 @@ html{
 
 /* ========================= WALLET CARD PREMIUM ========================= */
 .wallet-card{
-background:
+box-shadow:0 15px 40px rgba(37,99,235,.35);
+ background:
 linear-gradient(
     135deg,
     var(--primary),
