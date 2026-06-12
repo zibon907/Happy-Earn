@@ -42,7 +42,8 @@ html{
 
 :root{
     --bg:#0f172a;
-    --card: rgba(30, 41, 59, 0.75);
+
+    --card:rgba(30,41,59,.75);
     --card-solid:#1e293b;
     --card-light:#334155;
 
@@ -56,8 +57,7 @@ html{
     --text:#ffffff;
     --text-secondary:#cbd5e1;
 
-    --border: rgba(255,255,255,0.08);
-
+    --border:rgba(255,255,255,.08);
     --radius:18px;
 }
 
