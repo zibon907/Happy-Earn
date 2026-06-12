@@ -100,8 +100,8 @@ const StorageService = {
         let found = false;
 
         users = users.map(user => {
-
-            if (user.email === updatedUser.email) {
+		 id: crypto.randomUUID()
+            if (user.id === updatedUser.id) {
                 found = true;
 
                 return {
