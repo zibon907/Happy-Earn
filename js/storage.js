@@ -65,7 +65,14 @@ const StorageService = {
     // =========================================
     // ADD NEW USER
     // =========================================
-    addUser(newUser) {
+    addUser(newUser) 
+	if(
+ !newUser.name ||
+ !newUser.email
+){
+ return false;
+}
+		{
 
         const users = this.getUsers();
 
