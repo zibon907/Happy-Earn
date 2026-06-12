@@ -67,14 +67,12 @@ const StorageService = {
     // =========================================
     addUser(newUser) 
 	if(
- !newUser.name ||
- !newUser.email
-){
- return false;
-}
-		{
-
-        const users = this.getUsers();
+ 	  !newUser.name ||
+	 !newUser.email)
+{
+	 return false;
+	
+       const users = this.getUsers();
 
         const exists = users.some(
             user => user.email === newUser.email
@@ -148,7 +146,13 @@ const StorageService = {
     // =========================================
     // GET CURRENT USER SESSION
     // =========================================
-    getCurrentUser() {
+    getCurrentUser({
+		
+		if(current.email === email){
+   logout();
+	}
+
+{
 
         const user = localStorage.getItem(
             this.KEYS.CURRENT_USER
