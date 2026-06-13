@@ -262,20 +262,6 @@ placeBet({
         betAmount
     );
 
-    const win =
-        prediction === outcome;
-
-    if (win) {
-
-        return this.processWin({
-
-            userId,
-            gameType,
-            betAmount,
-            multiplier
-        });
-    }
-
     return this.processLoss({
 
         userId,
