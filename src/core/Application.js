@@ -1,4 +1,4 @@
-import Application from "./src/core/Application.js";
+import Application from "./Application.js";
 
 class Bootstrap {
 
