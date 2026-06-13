@@ -192,19 +192,48 @@ decode(token) {
 
     validate(token) {
 
-        const payload =
-            this.decode(token);
+    if (!token) {
 
-        if (!payload) {
+        return {
 
-            return {
+            valid: false,
 
-                valid: false,
+            reason: "TOKEN_MISSING"
+        };
+    }
 
-                reason:
-                    "INVALID_TOKEN"
-            };
-        }
+    const payload =
+        this.decode(token);
+
+    if (!payload) {
+
+        return {
+
+            valid: false,
+
+            reason: "INVALID_TOKEN"
+        };
+    }
+
+    if (
+        this.isExpired(token)
+    ) {
+
+        return {
+
+            valid: false,
+
+            reason: "TOKEN_EXPIRED"
+        };
+    }
+
+    return {
+
+        valid: true,
+
+        payload
+    };
+}
 
         if (
             this.isExpired(
