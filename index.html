@@ -395,12 +395,36 @@
     <!-- APP BOOTSTRAP -->
     <!-- ===================================== -->
 
-    <script type="module">
-        import Bootstrap from "./src/core/Bootstrap.js";
+        <script type="module">
+    import Bootstrap from "./src/core/Bootstrap.js";
 
-        document.addEventListener("DOMContentLoaded", () => {
-            Bootstrap.start();
-        });
+    const startApp = async () => {
+
+        try {
+
+            await Bootstrap.start();
+
+            window.__APP__ = Bootstrap;
+
+        } catch (err) {
+
+            console.error("[BOOT FAILED]", err);
+
+            document.body.innerHTML = `
+                <div style="padding:20px;color:red;font-family:Arial">
+                    <h2>App Failed to Start</h2>
+                    <pre>${err.message}</pre>
+                </div>
+            `;
+        }
+    };
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", startApp);
+    } else {
+        startApp();
+    }
+</script>
     </script>
 
 </body>
