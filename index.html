@@ -1,39 +1,408 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
 
-<link rel="stylesheet" href="style.css">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Virtual Gaming & Rewards Platform</title>
+
+    <meta name="description"
+        content="Enterprise Virtual Gaming & Rewards Platform. Wallets, Rewards, XP System, Leaderboards and Premium Gaming Experience." />
+
+    <meta name="theme-color" content="#0f172a">
+
+    <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/layout.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
 </head>
 
 <body>
 
-<div class="auth-box">
+    <!-- ===================================== -->
+    <!-- APP ROOT -->
+    <!-- ===================================== -->
 
-    <h2>Login</h2>
+    <div id="app">
 
-    <form id="loginForm">
+        <!-- ===================================== -->
+        <!-- NAVBAR -->
+        <!-- ===================================== -->
 
-        <input type="email" id="email" placeholder="Email" required>
+        <header class="navbar">
 
-        <input type="password" id="password" placeholder="Password" required>
+            <div class="container">
 
-        <button type="submit">Login</button>
+                <div class="navbar-wrapper">
 
-    </form>
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">🎮</span>
+                        <span class="logo-text">VGP</span>
+                    </a>
 
-    <p>
-        No account?
-        <a href="register.html">Register</a>
-    </p>
+                    <nav class="nav-menu">
 
-</div>
+                        <a href="#features">Features</a>
 
-<script src="storage.js"></script>
-<script src="auth.js"></script>
-<script src="login.js"></script>
+                        <a href="#games">Games</a>
+
+                        <a href="#rewards">Rewards</a>
+
+                        <a href="#leaderboard">Leaderboard</a>
+
+                    </nav>
+
+                    <div class="nav-actions">
+
+                        <a href="login.html" class="btn btn-secondary">
+                            Login
+                        </a>
+
+                        <a href="register.html" class="btn btn-primary">
+                            Register
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ===================================== -->
+        <!-- HERO SECTION -->
+        <!-- ===================================== -->
+
+        <section class="hero">
+
+            <div class="container">
+
+                <div class="hero-content">
+
+                    <span class="hero-badge">
+                        Enterprise Virtual Gaming Platform
+                    </span>
+
+                    <h1>
+                        Premium Virtual Gaming Experience
+                    </h1>
+
+                    <p>
+                        Earn rewards, build XP, unlock VIP levels,
+                        compete on leaderboards and enjoy a
+                        scalable gaming ecosystem designed with
+                        enterprise architecture.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="register.html"
+                            class="btn btn-primary btn-lg">
+                            Start Playing
+                        </a>
+
+                        <a href="#features"
+                            class="btn btn-outline btn-lg">
+                            Explore Platform
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- FEATURES -->
+        <!-- ===================================== -->
+
+        <section id="features" class="section">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>Platform Features</h2>
+
+                    <p>
+                        Designed with enterprise architecture
+                        and future-ready scalability.
+                    </p>
+
+                </div>
+
+                <div class="feature-grid">
+
+                    <article class="feature-card">
+
+                        <h3>Wallet Engine</h3>
+
+                        <p>
+                            Virtual wallet system with ledger
+                            architecture and transaction history.
+                        </p>
+
+                    </article>
+
+                    <article class="feature-card">
+
+                        <h3>Reward System</h3>
+
+                        <p>
+                            XP rewards, bonus rewards,
+                            achievements and progression.
+                        </p>
+
+                    </article>
+
+                    <article class="feature-card">
+
+                        <h3>Provably Fair Ready</h3>
+
+                        <p>
+                            Enterprise game engine prepared
+                            for advanced fairness architecture.
+                        </p>
+
+                    </article>
+
+                    <article class="feature-card">
+
+                        <h3>Admin Management</h3>
+
+                        <p>
+                            Monitoring, analytics, audit logs
+                            and complete administration tools.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- GAMES -->
+        <!-- ===================================== -->
+
+        <section id="games" class="section dark-section">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>Available Games</h2>
+
+                </div>
+
+                <div class="game-grid">
+
+                    <div class="game-card">
+
+                        <h3>Dice</h3>
+
+                        <p>
+                            RNG powered prediction experience.
+                        </p>
+
+                    </div>
+
+                    <div class="game-card">
+
+                        <h3>Coin Flip</h3>
+
+                        <p>
+                            Fast 50/50 reward gameplay.
+                        </p>
+
+                    </div>
+
+                    <div class="game-card">
+
+                        <h3>Spin Wheel</h3>
+
+                        <p>
+                            Multi multiplier reward wheel.
+                        </p>
+
+                    </div>
+
+                    <div class="game-card">
+
+                        <h3>Aviator</h3>
+
+                        <p>
+                            Real-time multiplier growth system.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- REWARDS -->
+        <!-- ===================================== -->
+
+        <section id="rewards" class="section">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>Reward Ecosystem</h2>
+
+                </div>
+
+                <div class="reward-grid">
+
+                    <div class="reward-card">
+
+                        <h3>XP Progression</h3>
+
+                    </div>
+
+                    <div class="reward-card">
+
+                        <h3>VIP Levels</h3>
+
+                    </div>
+
+                    <div class="reward-card">
+
+                        <h3>Referral Rewards</h3>
+
+                    </div>
+
+                    <div class="reward-card">
+
+                        <h3>Achievement System</h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- LEADERBOARD -->
+        <!-- ===================================== -->
+
+        <section id="leaderboard" class="section dark-section">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <h2>Leaderboard Preview</h2>
+
+                </div>
+
+                <div class="leaderboard-table">
+
+                    <div class="leaderboard-row">
+
+                        <span>#1</span>
+
+                        <span>Player Alpha</span>
+
+                        <span>125,000 XP</span>
+
+                    </div>
+
+                    <div class="leaderboard-row">
+
+                        <span>#2</span>
+
+                        <span>Player Bravo</span>
+
+                        <span>110,500 XP</span>
+
+                    </div>
+
+                    <div class="leaderboard-row">
+
+                        <span>#3</span>
+
+                        <span>Player Charlie</span>
+
+                        <span>96,200 XP</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- CTA -->
+        <!-- ===================================== -->
+
+        <section class="cta">
+
+            <div class="container">
+
+                <h2>
+                    Join the Next Generation Platform
+                </h2>
+
+                <p>
+                    Create your account and start earning
+                    rewards today.
+                </p>
+
+                <a href="register.html"
+                    class="btn btn-primary btn-lg">
+                    Create Account
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- ===================================== -->
+        <!-- FOOTER -->
+        <!-- ===================================== -->
+
+        <footer class="footer">
+
+            <div class="container">
+
+                <p>
+                    © 2026 Virtual Gaming Platform
+                </p>
+
+            </div>
+
+        </footer>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- APP BOOTSTRAP -->
+    <!-- ===================================== -->
+
+    <script type="module">
+        import Bootstrap from "./src/core/Bootstrap.js";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            Bootstrap.start();
+        });
+    </script>
 
 </body>
+
 </html>
