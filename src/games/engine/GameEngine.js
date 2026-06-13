@@ -33,7 +33,7 @@ class GameEngine {
         );
     }
     
-        validateBet(amount) {
+     validateBet(amount) {
 
     if (
         typeof amount !== "number"
