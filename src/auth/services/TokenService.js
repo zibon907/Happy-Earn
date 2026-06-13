@@ -189,8 +189,7 @@ decode(token) {
             payload.expiresAt
         );
     }
-
-    validate(token) {
+validate(token) {
 
     if (!token) {
 
