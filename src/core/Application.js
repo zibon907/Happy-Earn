@@ -1,14 +1,28 @@
-import Application from "./Application.js";
-
 class Application {
 
     constructor() {
+
         this.booted = false;
+        this.version = "1.0.0";
     }
 
     async boot() {
+
         this.booted = true;
+
         console.log("[APP] Started successfully");
+
+        return true;
+    }
+
+    isBooted() {
+
+        return this.booted;
+    }
+
+    getVersion() {
+
+        return this.version;
     }
 }
 
