@@ -33,16 +33,27 @@ class GameEngine {
         );
     }
 
-    validateBet(amount) {
+    this.validateBet(
+    betAmount
+);
 
-        if (
-            typeof amount !== "number"
-        ) {
+if (
+    !this.hasEnoughBalance(
+        userId,
+        betAmount
+    )
+) {
 
-            throw new Error(
-                "Invalid bet amount"
-            );
-        }
+    throw new Error(
+        "Insufficient balance"
+    );
+}
+
+// Deduct bet first
+walletService.debit(
+    userId,
+    betAmount
+);
 
         if (
             amount < this.MIN_BET
