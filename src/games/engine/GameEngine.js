@@ -243,21 +243,27 @@ class GameEngine {
         multiplier = 2
     }) {
 
-        this.validateBet(
-            betAmount
-        );
+        tthis.validateBet(
+    betAmount
+);
 
-        if (
-            !this.hasEnoughBalance(
-                userId,
-                betAmount
-            )
-        ) {
+if (
+    !this.hasEnoughBalance(
+        userId,
+        betAmount
+    )
+) {
 
-            throw new Error(
-                "Insufficient balance"
-            );
-        }
+    throw new Error(
+        "Insufficient balance"
+    );
+}
+
+// Deduct bet first
+walletService.debit(
+    userId,
+    betAmount
+);
 
         const win =
             prediction === outcome;
