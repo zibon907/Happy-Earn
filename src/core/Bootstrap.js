@@ -1,21 +1,27 @@
-import Bootstrap
-from "./Bootstrap.js";
+import Application from "./Application.js";
 
 class Bootstrap {
 
     constructor() {
 
         this.app = null;
+
+        this.started = false;
     }
 
     async start() {
+
+        if (this.started) {
+            return;
+        }
+
+        this.started = true;
 
         try {
 
             this.showBootMessage();
 
-            this.app =
-                new Application();
+            this.app = new Application();
 
             await this.app.boot();
 
@@ -35,7 +41,8 @@ class Bootstrap {
             );
 
             this.renderFatalError(
-                error.message
+                error?.message ||
+                "Unknown application error"
             );
         }
     }
@@ -45,24 +52,35 @@ class Bootstrap {
         document.body.classList.add(
             "app-ready"
         );
+
+        document.documentElement.setAttribute(
+            "data-app-status",
+            "ready"
+        );
     }
 
     initializeEvents() {
 
         window.addEventListener(
             "error",
-            event => {
+            (event) => {
 
                 console.error(
                     "[GLOBAL ERROR]",
-                    event.error
+                    {
+                        message: event.message,
+                        source: event.filename,
+                        line: event.lineno,
+                        column: event.colno,
+                        error: event.error
+                    }
                 );
             }
         );
 
         window.addEventListener(
             "unhandledrejection",
-            event => {
+            (event) => {
 
                 console.error(
                     "[PROMISE ERROR]",
@@ -76,7 +94,11 @@ class Bootstrap {
 
         console.log(
             "%cBOOTSTRAP START",
-            "color:#00e5ff;font-size:14px;font-weight:bold"
+            `
+            color:#00e5ff;
+            font-size:14px;
+            font-weight:bold;
+            `
         );
     }
 
@@ -84,11 +106,20 @@ class Bootstrap {
 
         console.log(
             "%cPLATFORM READY",
-            "color:#22c55e;font-size:14px;font-weight:bold"
+            `
+            color:#22c55e;
+            font-size:14px;
+            font-weight:bold;
+            `
         );
     }
 
     renderFatalError(message) {
+
+        const safeMessage =
+            String(message)
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
 
         document.body.innerHTML = `
             <div
@@ -98,17 +129,23 @@ class Bootstrap {
                     align-items:center;
                     justify-content:center;
                     background:#0b1120;
-                    color:white;
-                    font-family:Arial,sans-serif;
+                    color:#ffffff;
+                    font-family:Inter,Arial,sans-serif;
+                    padding:24px;
                 "
             >
-                <div>
+                <div
+                    style="
+                        max-width:600px;
+                        text-align:center;
+                    "
+                >
                     <h1>
                         Application Error
                     </h1>
 
                     <p>
-                        ${message}
+                        ${safeMessage}
                     </p>
                 </div>
             </div>
@@ -116,4 +153,8 @@ class Bootstrap {
     }
 }
 
-export default new Bootstrap();
+const bootstrap = new Bootstrap();
+
+Object.freeze(bootstrap);
+
+export default bootstrap;
