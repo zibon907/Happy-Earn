@@ -1,7 +1,5 @@
 import Application from "./Application.js";
 
-import Application from "./Application.js";
-
 class Bootstrap {
 
     constructor() {
@@ -19,6 +17,8 @@ class Bootstrap {
         window.App = this.app;
     }
 }
+
+export default new Bootstrap();
 
 export default new Bootstrap();
 
