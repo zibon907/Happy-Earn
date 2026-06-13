@@ -213,36 +213,37 @@ walletService.debit(
     }
 
     processLoss({
+    userId,
+    gameType,
+    betAmount
+}) {
+
+    transactionService.create({
+
         userId,
-        gameType,
-        betAmount
-    }) {
 
-        walletService.debit(
+        type: "LOSS",
+
+        amount: betAmount
+    });
+
+    const record =
+        this.createGameRecord({
+
             userId,
+
+            gameType,
+
+            result: "LOSS",
+
             betAmount
-        );
-
-        transactionService.create({
-            userId,
-            type: "LOSS",
-            amount: betAmount
         });
 
-        const record =
-            this.createGameRecord({
+    this.addHistory(
+        record
+    );
 
-                userId,
-                gameType,
-                result: "LOSS",
-                betAmount
-            });
-
-        this.addHistory(
-            record
-        );
-
-        return record;
+    return record;
     }
 
     placeBet({
