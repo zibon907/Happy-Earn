@@ -4,7 +4,8 @@ class CoinFlipGame {
 
     constructor() {
 
-        this.GAME_TYPE = "COIN_FLIP";
+        this.GAME_TYPE =
+            "COIN_FLIP";
 
         this.SIDES = [
             "HEADS",
@@ -29,7 +30,8 @@ class CoinFlipGame {
 
         if (
             typeof betAmount !==
-            "number"
+                "number" ||
+            isNaN(betAmount)
         ) {
 
             throw new Error(
@@ -37,9 +39,14 @@ class CoinFlipGame {
             );
         }
 
+        const normalizedChoice =
+            String(choice)
+                .toUpperCase()
+                .trim();
+
         if (
             !this.SIDES.includes(
-                choice
+                normalizedChoice
             )
         ) {
 
@@ -48,7 +55,7 @@ class CoinFlipGame {
             );
         }
 
-        return true;
+        return normalizedChoice;
     }
 
     flip() {
@@ -61,14 +68,49 @@ class CoinFlipGame {
         return this.SIDES[index];
     }
 
-    checkWin(
-        choice,
-        result
-    ) {
+    getRandomSeed() {
 
         return (
-            choice === result
+            Date.now() +
+            Math.random()
         );
+    }
+
+    createResultObject({
+        userId,
+        betAmount,
+        choice,
+        outcome,
+        gameResult
+    }) {
+
+        return {
+
+            gameType:
+                this.GAME_TYPE,
+
+            userId,
+
+            betAmount,
+
+            prediction:
+                choice,
+
+            outcome,
+
+            result:
+                gameResult.result,
+
+            reward:
+                gameResult.reward || 0,
+
+            gameId:
+                gameResult.id,
+
+            playedAt:
+                new Date()
+                    .toISOString()
+        };
     }
 
     async play({
@@ -77,45 +119,19 @@ class CoinFlipGame {
         choice
     }) {
 
-        this.validateInput({
+        const normalizedChoice =
+            this.validateInput({
 
-            userId,
-            betAmount,
-            choice
-        });
+                userId,
+                betAmount,
+                choice
+            });
 
-        const result =
+        const outcome =
             this.flip();
 
-        const win =
-            this.checkWin(
-                choice,
-                result
-            );
-
-        if (win) {
-
-            return gameEngine
-                .processWin({
-
-                    userId,
-
-                    gameType:
-                        this.GAME_TYPE,
-
-                    betAmount,
-
-                    multiplier:
-                        this.DEFAULT_MULTIPLIER,
-
-                    choice,
-
-                    result
-                });
-        }
-
-        return gameEngine
-            .processLoss({
+        const gameResult =
+            gameEngine.placeBet({
 
                 userId,
 
@@ -124,10 +140,28 @@ class CoinFlipGame {
 
                 betAmount,
 
-                choice,
+                prediction:
+                    normalizedChoice,
 
-                result
+                outcome,
+
+                multiplier:
+                    this.DEFAULT_MULTIPLIER
             });
+
+        return this.createResultObject({
+
+            userId,
+
+            betAmount,
+
+            choice:
+                normalizedChoice,
+
+            outcome,
+
+            gameResult
+        });
     }
 
     getRules() {
@@ -137,12 +171,22 @@ class CoinFlipGame {
             game:
                 this.GAME_TYPE,
 
-            choices:
-                this.SIDES,
-
             multiplier:
-                this.DEFAULT_MULTIPLIER
+                this.DEFAULT_MULTIPLIER,
+
+            minimumChoices:
+                2,
+
+            choices:
+                [...this.SIDES]
         };
+    }
+
+    getAvailableChoices() {
+
+        return [
+            ...this.SIDES
+        ];
     }
 
     simulate(
@@ -183,16 +227,39 @@ class CoinFlipGame {
             tails,
 
             headsPercent:
-                (
-                    heads /
-                    rounds
-                ) * 100,
+                Number(
+                    (
+                        heads /
+                        rounds
+                    ) * 100
+                ).toFixed(2),
 
             tailsPercent:
-                (
-                    tails /
-                    rounds
-                ) * 100
+                Number(
+                    (
+                        tails /
+                        rounds
+                    ) * 100
+                ).toFixed(2)
+        };
+    }
+
+    healthCheck() {
+
+        return {
+
+            game:
+                this.GAME_TYPE,
+
+            status:
+                "ACTIVE",
+
+            multiplier:
+                this.DEFAULT_MULTIPLIER,
+
+            timestamp:
+                new Date()
+                    .toISOString()
         };
     }
 }
