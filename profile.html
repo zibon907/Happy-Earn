@@ -1,538 +1,146 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Virtual Gaming Platform</title>
+    <link rel="stylesheet" href="./assets/css/variables.css">
+    <link rel="stylesheet" href="./assets/css/layout.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+    <link rel="stylesheet" href="./assets/css/dashboard.css">
+</head>
 
-<title>
-    User Profile |Rewards Platform BD
-</title>
+<body>
 
-<link
-    rel="stylesheet"
-    href="css/profile.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-  </head>
+    <div class="app-layout">
 
- <body>
-<!-- ===================================== -->
-<!-- Application Layout -->
-<!-- ===================================== -->
-
-<div class="app-layout">
-
-    <!-- ===================================== -->
-    <!-- Sidebar -->
-    <!-- ===================================== -->
-
-    <aside class="sidebar">
-
-        <div class="sidebar-header">
-
-            <h2 class="brand-logo">
-                 Rewards platform BD
-            </h2>
-
-        </div>
-
-        <nav class="sidebar-nav">
-
-            <a
-                href="dashboard.html"
-                class="nav-link">
-
-                Dashboard
-
-            </a>
-
-            <a
-                href="profile.html"
-                class="nav-link active">
-
-                Profile
-
-            </a>
-
-            <a
-                href="settings.html"
-                class="nav-link">
-
-                Settings
-
-            </a>
-
-            <a
-                href="notifications.html"
-                class="nav-link">
-
-                Notifications
-
-            </a>
-
-        </nav>
-
-    </aside>
-
-    <!-- ===================================== -->
-    <!-- Main Content -->
-    <!-- ===================================== -->
-
-    <main class="main-content">
-
-        <!-- ===================================== -->
-        <!-- Top Navigation -->
-        <!-- ===================================== -->
-
-        <header class="topbar">
-
-            <div class="topbar-left">
-
-                <h1>
-                    Profile Center
-                </h1>
-
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="brand-logo">🎮 VGP</h2>
             </div>
 
-            <div class="topbar-right">
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="profile.html" class="nav-link active">Profile</a>
+                <a href="settings.html" class="nav-link">Settings</a>
+            </nav>
+        </aside>
 
-                <button
-                    id="notificationBtn"
-                    class="icon-button">
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
 
-                    Notifications
+            <!-- TOPBAR -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h1>User Profile</h1>
+                </div>
+                <div class="topbar-right">
+                    <button id="logoutBtn" class="logout-button">Logout</button>
+                </div>
+            </header>
 
-                </button>
+            <!-- PROFILE HERO -->
+            <section class="card profile-hero">
+                <div class="profile-avatar-wrapper">
+                    <div id="profileAvatar" class="profile-avatar">P</div>
+                </div>
+                <div class="profile-hero-content">
+                    <h2 id="fullName">Loading...</h2>
+                    <p id="username">@username</p>
+                    <div class="hero-meta">
+                        <span id="vipBadge" class="vip-badge">Bronze</span>
+                        <span id="joinDate">Joined Recently</span>
+                    </div>
+                </div>
+            </section>
 
-                <button
-                    id="logoutBtn"
-                    class="logout-button">
+            <!-- VIP PROGRESS -->
+            <section class="card">
+                <div class="vip-progress-header">
+                    <div>
+                        <h3>VIP Progress</h3>
+                        <p>Progress to next VIP level</p>
+                    </div>
+                    <strong id="vipProgressText">0%</strong>
+                </div>
+                <div class="progress-track">
+                    <div id="vipProgressFill" class="progress-fill" style="width: 0%;"></div>
+                </div>
+            </section>
 
-                    Logout
-
-                </button>
-
-            </div>
-
-        </header>
-<!-- ===================================== --><!-- Profile Cover --><!-- ===================================== --><section class="profile-cover"><div class="cover-overlay"></div>
-
-<div class="cover-content">
-
-    <h2>
-        Welcome Back
-    </h2>
-
-    <p>
-        Manage your rewards, achievements and account activity.
-    </p>
-
-</div>
-
-</section><!-- ===================================== --><!-- VIP Progress --><!-- ===================================== --><section class="vip-progress-card"><div class="vip-progress-header">
-
-    <div>
-
-        <h3>
-            VIP Progress
-        </h3>
-
-        <p>
-            Progress to next VIP level
-        </p>
-
-    </div>
-
-    <strong id="vipProgressText">
-        65%
-    </strong>
-
-</div>
-
-<div class="vip-levels">
-
-    <span>
-        Bronze
-    </span>
-
-    <span>
-        Silver
-    </span>
-
-</div>
-
-<div class="progress-track">
-
-    <div
-        id="vipProgressFill"
-        class="progress-fill">
-    </div>
-
-</div>
-
-</section>
-        <!-- ===================================== -->
-        <!-- Profile Hero -->
-        <!-- ===================================== -->
-
-        <section class="profile-hero">
-
-            <div class="profile-avatar-wrapper">
-
-                <div
-                    id="profileAvatar"
-                    class="profile-avatar">
-
-                    H
-
+            <!-- STATS GRID -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total XP</h3>
+                    <div id="totalXp" class="stat-value">0</div>
                 </div>
 
-            </div>
-
-            <div class="profile-hero-content">
-
-                <h2 id="fullName">
-
-                    Loading...
-
-                </h2>
-
-                <p id="username">
-
-                    @username
-
-                </p>
-
-                <div class="hero-meta">
-
-                    <span
-                        id="vipBadge"
-                        class="vip-badge">
-
-                        Bronze
-
-                    </span>
-
-                    <span
-                        id="joinDate">
-
-                        Joined Recently
-
-                    </span>
-
+                <div class="stat-card">
+                    <h3>Wallet Balance</h3>
+                    <div id="totalPoints" class="stat-value">0</div>
                 </div>
 
-            </div>
-
-        </section>
-
-        <!-- ===================================== -->
-        <!-- Statistics Grid -->
-        <!-- ===================================== -->
-
-        <section class="stats-grid">
-
-            <div class="stat-card">
-
-                <h3>
-                    Total Points
-                </h3>
-
-                <div
-                    id="totalPoints"
-                    class="stat-value">
-
-                    0
-
+                <div class="stat-card">
+                    <h3>Referrals</h3>
+                    <div id="totalReferrals" class="stat-value">0</div>
                 </div>
 
-            </div>
-
-            <div class="stat-card">
-
-                <h3>
-                    Referrals
-                </h3>
-
-                <div
-                    id="totalReferrals"
-                    class="stat-value">
-
-                    0
-
+                <div class="stat-card">
+                    <h3>Security Score</h3>
+                    <div id="securityScore" class="stat-value">100</div>
                 </div>
+            </section>
 
-            </div>
-
-            <div class="stat-card">
-
-                <h3>
-                    Activities
-                </h3>
-
-                <div
-                    id="activityCount"
-                    class="stat-value">
-
-                    0
-
-                </div>
-
-            </div>
-
-            <div class="stat-card">
-
-                <h3>
-                    Security Score
-                </h3>
-
-                <div
-                    id="securityScore"
-                    class="stat-value">
-
-                    100
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- ===================================== -->
-        <!-- Content Grid -->
-        <!-- ===================================== -->
-
-        <section class="content-grid">
-
-            <!-- Account Information -->
-
-            <div class="card">
-
+            <!-- ACCOUNT INFO -->
+            <section class="card">
                 <div class="card-header">
-
-                    <h3>
-                        Account Information
-                    </h3>
-
+                    <h3>Account Information</h3>
                 </div>
-
                 <div class="card-body">
-
                     <div class="info-row">
-
-                        <span>
-                            Full Name
-                        </span>
-
-                        <strong
-                            id="accountFullName">
-
-                            -
-                        </strong>
-
+                        <span>Username</span>
+                        <strong id="accountUsername">-</strong>
                     </div>
-
                     <div class="info-row">
-
-                        <span>
-                            Username
-                        </span>
-
-                        <strong
-                            id="accountUsername">
-
-                            -
-                        </strong>
-
+                        <span>Email</span>
+                        <strong id="accountEmail">-</strong>
                     </div>
-
                     <div class="info-row">
-
-                        <span>
-                            Email
-                        </span>
-
-                        <strong
-                            id="accountEmail">
-
-                            -
-                        </strong>
-
+                        <span>VIP Level</span>
+                        <strong id="accountVip">Bronze</strong>
                     </div>
-
                     <div class="info-row">
-
-                        <span>
-                            VIP Level
-                        </span>
-
-                        <strong
-                            id="accountVip">
-
-                            -
-                        </strong>
-
+                        <span>Account Status</span>
+                        <strong id="accountStatus">Active</strong>
                     </div>
-
-                    <div class="info-row">
-
-                        <span>
-                            Referral Code
-                        </span>
-
-                        <strong
-                            id="referralCode">
-
-                            -
-                        </strong>
-
-                    </div>
-
-                    <div class="info-row">
-
-                        <span>
-                            Account Status
-                        </span>
-
-                        <strong
-                            id="accountStatus">
-
-                            Active
-                        </strong>
-
-                    </div>
-
                 </div>
+            </section>
 
-            </div>
-
-            <!-- Referral Center -->
-
-            <div class="card">
-
+            <!-- REFERRAL CENTER -->
+            <section class="card">
                 <div class="card-header">
-
-                    <h3>
-                        Referral Center
-                    </h3>
-
+                    <h3>Referral Center</h3>
                 </div>
-
                 <div class="card-body">
-
                     <div class="referral-box">
-
-                        <span
-                            id="referralDisplay">
-
-                            VR-XXXXXX
-                        </span>
-
+                        <span id="referralDisplay">VGP-XXXXXX</span>
                     </div>
-
-                    <button
-                        id="copyReferralBtn"
-                        class="primary-button">
-
-                        Copy Referral Code
-
-                    </button>
-
+                    <button id="copyReferralBtn" class="btn btn-primary">Copy Referral Code</button>
                 </div>
+            </section>
 
-            </div>
+        </main>
 
-        </section>
+    </div>
 
-        <!-- ===================================== -->
-        <!-- Achievements -->
-        <!-- ===================================== -->
+    <!-- Scripts -->
+    <script src="./js/config.js"></script>
+    <script src="./js/storage.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/profile.js"></script>
 
-        <section class="card">
+</body>
 
-            <div class="card-header">
-
-                <h3>
-                    Achievements
-                </h3>
-
-            </div>
-
-            <div
-                id="achievementGrid"
-                class="achievement-grid">
-
-                <!-- Dynamic Achievement Cards -->
-
-            </div>
-
-        </section>
-
-        <!-- ===================================== -->
-        <!-- Recent Activities -->
-        <!-- ===================================== -->
-
-        <section class="card">
-
-            <div class="card-header">
-
-                <h3>
-                    Recent Activities
-                </h3>
-
-            </div>
-
-            <div
-                id="activityTimeline"
-                class="activity-timeline">
-
-                <!-- Dynamic Activities -->
-
-            </div>
-
-        </section>
-
-        <!-- ===================================== -->
-        <!-- Quick Actions -->
-        <!-- ===================================== -->
-
-        <section class="quick-actions">
-
-            <button
-                class="action-button"
-                onclick="location.href='dashboard.html'">
-
-                Dashboard
-
-            </button>
-
-            <button
-                class="action-button"
-                onclick="location.href='settings.html'">
-
-                Settings
-
-            </button>
-
-            <button
-                class="action-button"
-                onclick="location.href='notifications.html'">
-
-                Notifications
-
-            </button>
-
-        </section>
-
-    </main>
-
-</div>
-
-<script src="js/config.js"></script>
-<script src="js/storage.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/profile.js"></script>
-
-</body></html>
+</html>
