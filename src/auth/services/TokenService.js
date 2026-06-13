@@ -234,29 +234,6 @@ validate(token) {
     };
 }
 
-        if (
-            this.isExpired(
-                token
-            )
-        ) {
-
-            return {
-
-                valid: false,
-
-                reason:
-                    "TOKEN_EXPIRED"
-            };
-        }
-
-        return {
-
-            valid: true,
-
-            payload
-        };
-    }
-
     getUserId(token) {
 
         const result =
