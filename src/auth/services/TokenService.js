@@ -298,26 +298,30 @@ class TokenService {
 
     refreshAccessToken() {
 
-        const refreshToken =
-            this.getRefreshToken();
+    const refreshToken =
+        this.getRefreshToken();
 
-        const validation =
-            this.validate(
-                refreshToken
-            );
-
-        if (
-            !validation.valid
-        ) {
-
-            return null;
-        }
-
-        return this.createAccessToken(
-            validation.payload
-                .userId
+    const validation =
+        this.validate(
+            refreshToken
         );
+
+    if (!validation.valid) {
+        return null;
     }
+
+    const newAccessToken =
+        this.createAccessToken(
+            validation.payload.userId
+        );
+
+    localStorage.setItem(
+        this.STORAGE_KEYS.ACCESS_TOKEN,
+        newAccessToken
+    );
+
+    return newAccessToken;
+}
 
     revokeAll() {
 
