@@ -33,26 +33,34 @@ class GameEngine {
         );
     }
     
-        if (
-            amount < this.MIN_BET
-        ) {
+        validateBet(amount) {
 
-            throw new Error(
-                `Minimum bet is ${this.MIN_BET}`
-            );
-        }
-
-        if (
-            amount > this.MAX_BET
-        ) {
-
-            throw new Error(
-                `Maximum bet is ${this.MAX_BET}`
-            );
-        }
-
-        return true;
+    if (
+        typeof amount !== "number"
+    ) {
+        throw new Error(
+            "Invalid bet amount"
+        );
     }
+
+    if (
+        amount < this.MIN_BET
+    ) {
+        throw new Error(
+            `Minimum bet is ${this.MIN_BET}`
+        );
+    }
+
+    if (
+        amount > this.MAX_BET
+    ) {
+        throw new Error(
+            `Maximum bet is ${this.MAX_BET}`
+        );
+    }
+
+    return true;
+        }
 
     getBalance(userId) {
 
